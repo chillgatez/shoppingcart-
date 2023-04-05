@@ -14,19 +14,10 @@ const Cart = function(items) {
 
 Cart.prototype.addItem = function(product, quantity) {
   // TODO: Fill in this instance method to create a new CartItem and add it to this.items
-  let updated = false;
-  this.items.forEach(function() {
-    if(elem.product.name === product.name) {
-      elem.quantity = parseInt(quantity) + parseInt(elem.quantity);
-      updated = true;
-      if(!updated) {
-        let cartitem = new CartItem(product, quantity);
-        this.items.push(cartitem)
-     }
-   };
-  })
-}
+  let newCartItem = new CartItem (product, quantity)
+  this.items.push(newCartItem);
 
+};
 
 Cart.prototype.saveToLocalStorage = function() {
   // TODO: Fill in this instance method to save the contents of the cart to localStorage
@@ -37,9 +28,11 @@ Cart.prototype.saveToLocalStorage = function() {
 Cart.prototype.removeItem = function(item) {
   // TODO: Fill in this instance method to remove one item from the cart.
   // Note: You will have to decide what kind of parameter to pass in here!
-  this.items = this.items.filter(
-    (currentItem) => currentItem.product.name !== item.name
-  );
+  let filteredItems = this.items.filter(function(currentItem){
+    console.log('filter', item.name, currentItem.name);
+    return item.name !== currentItem.product.name
+  })
+this.items = filteredItems;
 };
 
 Cart.prototype.updateCounter = function() {
